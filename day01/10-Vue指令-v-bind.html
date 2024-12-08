@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-bind:src => :src -->
+        <img @click="fn" v-bind:src="imgUrl" v-bind:title="msg" alt="">
+
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                i: 1,
+                imgUrl: './imgs/10-01.png',
+                msg: 'hello 波仔'
+            },
+            methods: {
+                fn() {
+                    console.log(this.i);
+
+                    this.i = this.i === 1 ? 2 : 1
+                    this.imgUrl = `./imgs/10-0${this.i}.png`
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
