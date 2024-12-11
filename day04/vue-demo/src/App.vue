@@ -1,31 +1,46 @@
 <template>
   <div class="app">
-    <UserInfo
-      :username="username"
-      :age="age"
-      :isSingle="isSingle"
-      :car="car"
-      :hobby="hobby"
-    ></UserInfo>
+    <!-- 编辑状态 -->
+    <div v-if="isShowEdit">
+      <input type="text" v-model="editValue" ref="inp" />
+      <button>确认</button>
+    </div>
+
+    <!-- 默认状态 -->
+    <div v-else>
+      <span>{{ title }}</span>
+      <button @click="handleEdit">编辑</button>
+    </div>
   </div>
 </template>
 
 <script>
-import UserInfo from "./components/UserInfo.vue";
 export default {
   data() {
     return {
-      username: "小帅",
-      age: 28,
-      isSingle: true,
-      car: {
-        brand: "宝马",
-      },
-      hobby: ["篮球", "足球", "羽毛球"],
+      title: "大标题",
+      isShowEdit: false,
+      editValue: "",
     };
   },
-  components: {
-    UserInfo,
+  methods: {
+    handleEdit() {
+      // 1. 显示输入框 (异步dom 更新)
+      this.isShowEdit = true;
+      // 2. 让 输入框获取焦点
+      console.log(this.$refs.inp);
+
+      // this.$nextTick(() => {
+      //   console.log(this.$refs.inp);
+      //   this.$refs.inp.focus();
+      // });
+
+      // 这个也可以 $nextTick会更精准
+      // setTimeout(() => {
+      //   console.log(this.$refs.inp);
+      //   this.$refs.inp.focus();
+      // }, 0);
+    },
   },
 };
 </script>
